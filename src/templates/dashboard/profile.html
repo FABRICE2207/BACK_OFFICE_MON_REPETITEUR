@@ -1,0 +1,62 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="xs-pd-20-10 pd-ltr-20">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                
+                <nav aria-label="breadcrumb" role="navigation">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">MON PROFILE</a></li>
+                    </ol>
+                </nav>
+            </div>
+    </div>
+</div>
+
+<div class="xs-pd-20-10 pd-ltr-20">
+    <div class="page-header">
+        <form>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Nom</label>
+                    <input class="form-control form-control-lg" type="text">
+                </div>
+                
+                <div class="col-md-6 form-group">
+                    <label>Prénoms</label>
+                    <input class="form-control form-control-lg" type="text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control form-control-lg" type="text">
+                </div>
+                
+                <div class="col-md-6 form-group">
+                    <label>Téléphone</label>
+                    <input type="text" class="form-control form-control-lg" type="text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" class="form-control form-control-lg" type="text">
+                </div>
+                
+                <div class="col-md-6 form-group">
+                    <label>Confirmation du mot de passe</label>
+                    <input type="password" class="form-control form-control-lg" type="text">
+                </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 text-right">
+                    <input type="submit" class="btn btn-primary" value="Modifier">
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

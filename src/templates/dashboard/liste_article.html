@@ -1,0 +1,163 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+
+<style>
+    .vert{
+        color: white;
+        background-color: green;
+    }
+    .red{
+        color: white;
+        background-color: red;
+    }
+</style>
+
+<div class="xs-pd-20-10 pd-ltr-20">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                
+                <nav aria-label="breadcrumb" role="navigation">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">ARTICLES</a></li>
+                        <li class="breadcrumb-item" aria-current="page">Liste des articles soumis</li>
+
+                        <li class="breadcrumb-item" aria-current="page">Liste des articles</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="text-right">
+                    <a href="/ajout_article" class="btn btn-primary">Ajouter un article</a>
+                </div>
+            </div>
+
+            <!-- <div class="col-md-6 col-sm-12 text-right">
+                <div class="dropdown">
+                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                        January 2018
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Export List</a>
+                        <a class="dropdown-item" href="#">Policies</a>
+                        <a class="dropdown-item" href="#">View Assets</a>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</div>
+
+<div class="card-box mb-30">
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap" id="Statut">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+                <tr>
+                    <th class="table-plus datatable-nosort">Noms</th>
+                    <th>Code barre</th>
+                    <th>Prix</th>
+                    <th>Coût d'achat</th>
+                    <th>Statut</th>
+                    <!-- <th>Première image</th>
+                    <th>Deuxième image</th> -->
+                    <th>Catégories</th>
+                    <th class="datatable-nosort">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for article in datas %}
+                    <tr>
+                        <td>{{ article.nom }}</td>
+                        <td>{{ article.code_bar }}</td>
+                        <td>{{ article.prix }}</td>
+                        <td>{{ article.cout_achat }}</td>
+                        <!-- <td><img src="{{url_for('static', filename='images/' ~ article.image_first)}}" alt="{{ article.image_first }}" width="40" height="40"></td>
+                        <td><img src="{{url_for('static', filename='images/' ~ article.image_two)}}" alt="{{ article.image_two }}" width="40" height="40"></td> -->
+                            {% if article.statut == "publié" %}
+                                <td id="change_status" class="vert">{{ article.statut }}</td>
+                            {% endif %}
+
+                            {% if article.statut == "refusé" %}
+                              <td id="change_status" class="red">{{ article.statut }}</td>
+                            {% endif %}
+
+                            {% if article.statut == "soumis" %}
+                                <td id="change_status">{{ article.statut }}</td>
+                            {% endif %}
+                       
+                        <td>{{ article.categories }}</td>
+                        <td>
+                            <div class="dropdown" style="cursor: pointer;">
+                                <a class="dropdown-item userinfo text-center" data-id='{{article.id}}'><i class="dw dw-eye"></i></a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="dropdown" style="cursor: pointer;">
+                                <a href="/modif_article/{{article.id}}" class="dropdown-item text-center"><i class="dw dw-edit"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Modal -->
+        <div class="modal fade" id="showModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalToggleLabel">Informations de l'article</h5>
+                  <img src="{{url_for('static', filename='vendors/images/fermer-la-croix.png')}}" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal"  width="20">
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <div class="btn">
+                        <input type="button" id="Btnsubmit" value="Publié" class="btn btn-success">
+                        <div class="btn btn-danger" id="BtnsubmitRefuse">Refusé</div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Pagination -->
+<div class="text-right">
+    <a href="{{ url_for('dashboard.liste_articles', page=datas.prev_num) }}"
+      class="btn btn-outline-primary 
+      {% if datas.page == 1 %}disabled{% endif %}">
+        <!-- &laquo; -->
+        Précédent
+    </a>
+  <!-- Loop through the number of pages to display a link for each-->
+    {% for page_num in datas.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+  {% if page_num %}
+  <!-- Check for the active page and set the link to "Active"-->
+            {% if datas.page == page_num %}
+            <a href="{{ url_for('dashboard.liste_articles', page=page_num) }}"
+              class="btn btn-primary">
+                {{ page_num }}
+            </a>
+            {% else %}
+            <a href="{{ url_for('dashboard.liste_articles', page=page_num) }}"
+              class="btn btn-outline-primary">
+                {{ page_num }}
+            </a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+    <a href="{{ url_for('dashboard.liste_articles', page=datas.next_num) }}"
+      class="btn btn-outline-primary
+      {% if datas.page == datas.pages %}disabled{% endif %}">
+        <!-- &raquo; -->
+        Suivant
+    </a>
+</div>
+<p class="text-right mt-3">
+  Page {{ datas.page }} sur {{ datas.pages }}
+</p>
+{% endblock content %}

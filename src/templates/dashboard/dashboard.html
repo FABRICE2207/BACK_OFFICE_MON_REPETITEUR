@@ -1,0 +1,47 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="row clearfix progress-box">
+    <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+        <div class="card-box pd-30 height-100-p">
+            <div class="progress-box text-center">
+                <h5 class="text-black padding-top-10 h5">Vendeurs</h5>
+                <span class="d-block">{{ count_vendeur }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-6 col-sm-12 mb-30">
+        <div class="card-box pd-30 height-100-p">
+            <div class="progress-box text-center">
+                <h5 class="text-light-green padding-top-10 h5">Articles publiés</h5>
+                <span class="d-block">{{ count_arti_pub }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-6 col-sm-12 mb-30">
+        <div class="card-box pd-30 height-100-p">
+            <div class="progress-box text-center">
+                <h5 class="text-blue padding-top-10 h5">Articles soumis</h5>
+                <span class="d-block">{{ count_arti_soumis }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-6 col-sm-12 mb-30">
+        <div class="card-box pd-30 height-100-p">
+            <div class="progress-box text-center">
+                <h5 class="text-light-purple padding-top-10 h5">Articles validés</h5>
+                <span class="d-block">{{ count_arti_valid }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+        <div class="card-box pd-30 height-100-p">
+            <div class="progress-box text-center">
+                <h5 class="text-light-orange padding-top-10 h5">Articles Annulés</h5>
+                <span class="d-block">{{ count_arti_annul }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

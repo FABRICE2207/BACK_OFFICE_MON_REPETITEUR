@@ -1,0 +1,121 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+
+<style>
+    .vert{
+        color: white;
+        background-color: green;
+    }
+    .red{
+        color: white;
+        background-color: red;
+    }
+</style>
+
+<div class="xs-pd-20-10 pd-ltr-20">
+    <div class="page-header">
+        <div class="row">
+            <div class="col">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-danger alert-dismissible fade show text-center" type="button" data-bs-dismiss="alert" aria-label="Close" role="alert">
+                            <strong>{{ message }}</strong>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <nav aria-label="breadcrumb" role="navigation">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">AJOUTER UN ARTICLE</a></li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- <div class="col-md-6 col-sm-12 text-right">
+                <div class="dropdown">
+                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                        January 2018
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Export List</a>
+                        <a class="dropdown-item" href="#">Policies</a>
+                        <a class="dropdown-item" href="#">View Assets</a>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+        <div class="container">
+            <hr>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-4 col-sm-12">
+                        <label for="">Nom</label>
+                        <input type="text" name="nom" class="form-control" placeholder="nom de l'article">
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <label for="">Code barre</label>
+                        <input type="text" name="code_bar" class="form-control" placeholder="Code barre de l'article">
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <label for="">Prix</label>
+                        <input type="text" name="prix" class="form-control" placeholder="Prix de l'article">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-4 col-sm-12">
+                        <label for="">Cout d'achat</label>
+                        <input type="text" name="cout_achat" class="form-control" placeholder="cout de l'achat l'article">
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <label for="">Première image</label>
+                        <input type="file" name="image_first" class="form-control" placeholder="Première image">
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <label for="">Deuxième image</label>
+                        <input type="file" name="image_two" class="form-control" placeholder="Deuxième image">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6 col-sm-12">
+                        <label for="">Catégories</label>
+                        <select name="categories" id="" class="form-control">
+                            <option>Choisir une catégorie</option>
+                            <option value="Mode">Mode</option>
+                            <option value="TV et Electroménager">TV et Electroménager</option>
+                            <option value="Maison et bureau">Maison et bureau</option>
+                            <option value="Boisson">Boisson</option>
+                            <option value="Beauté et hygiène">Beauté et hygiène</option>
+                            <option value="Livre">Livre</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <label for="">Statut</label>
+                        <select name="statut" id="" class="form-control">
+                            <option>Choisir un statut</option>
+                            <option value="publié">Publié</option>
+                            <option value="soumis">Soumis</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                       <div class="text-right">
+                        <input type="submit" class="btn btn-primary" value="Ajouter">
+                       </div>
+                    </div>
+                   
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

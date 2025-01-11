@@ -1,0 +1,85 @@
+<!-- Afficher les informations d'un articles -->
+<style>
+.bloc{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bloc1{
+    display: flex;
+    flex: 1;
+    overflow-x: scroll;
+    width: 500px;
+}
+.bloc1 div{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 20px;
+    padding: 10px;
+    flex: none;
+}
+.bloc1::-webkit-scrollbar{
+    display: none;
+}
+
+#btnBack, #btnNext{
+    cursor: pointer;
+    margin-right: 5px;
+}
+.bloc2{
+    border-left: 2px solid #8080804a;
+}
+.bloc2 p{
+    padding-left: 5px;
+}
+.vert{
+    color: green;
+}
+.red{
+    color: red;
+}
+</style>
+
+
+<script>
+    // Pour scroller les images
+    // Déclaration des variables
+    let scrollContainer = document.querySelector(".bloc1");
+    let btnBack = document.getElementById("btnBack");
+    let btnNext = document.getElementById("btnNext");
+    
+    // clique pour aller à droite
+    btnNext.addEventListener("click", ()=>{
+        scrollContainer.scrollLeft += 900;
+    });
+
+    // clique pour aller à gauche
+    btnBack.addEventListener("click", ()=>{
+        scrollContainer.scrollLeft -= 900;
+    })
+</script>
+
+<div class="bloc">
+    <img src="{{url_for('static', filename='vendors/images/arrow_left.png')}}" alt=""  width="30" id="btnBack">
+        <div class="bloc1">
+            <div>
+                <span><img src="{{url_for('static', filename='images/' ~ get_article.image_first)}}" width="300"  alt="{{ get_article.image_first }}"></span>
+            </div>
+            <div>
+                <span><img src="{{url_for('static', filename='images/' ~ get_article.image_two)}}" width="300" alt="{{ get_article.image_two }}"></span>
+            </div>
+        </div>
+    <img src="{{url_for('static', filename='vendors/images/arrow_rigth.png')}}" alt="" width="30" id="btnNext">
+
+    <div class="bloc2">
+        <p>Nom : <b>{{ get_article.nom }}</b></p>
+        <p>Pix : <b>{{ get_article.prix }} Fcfa</b></p>
+        <p>Coût d'achat : <b>{{ get_article.cout_achat }}</b></p>
+        <p>code barre : <b>{{ get_article.code_bar }}</b></p>
+        <p>Categorie : <b>{{ get_article.categories }}</b></p>
+        <p>Statut : <b>{{ get_article.statut }}</b></p>
+        <p>Date et heure de publication : <br> <b>{{ get_article.date_create.strftime("%d/%m/%y"+ " " + "%H:%M:%S")  }}</b>
+    </div>
+</div>
+
